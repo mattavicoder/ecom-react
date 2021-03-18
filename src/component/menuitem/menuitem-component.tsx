@@ -1,10 +1,15 @@
 import React, { FunctionComponent } from 'react'
 import {TypeMenu} from '../../types/menuitem-type'
 import './menuitem-styles.scss';
+import {RouteComponentProps, withRouter} from 'react-router-dom'
 
+interface reactState extends RouteComponentProps<any>{
+    typeMenu: TypeMenu
+}
 
-export const MenuItem: FunctionComponent<TypeMenu> = ({title, imageUrl, size}) => {
-   return <div className={`${size} menu-item`} >
+const MenuItem: FunctionComponent<reactState> = ({ typeMenu: {title, imageUrl, size},history}) => {
+    console.log(history)
+   return <div className={`${size} menu-item`} onClick={() => history.push('/india')} >
        <div className="background-image" style={{
        backgroundImage: `url(${imageUrl})` 
    }} />
@@ -16,3 +21,5 @@ export const MenuItem: FunctionComponent<TypeMenu> = ({title, imageUrl, size}) =
                     </div>
                 </div>
 }
+
+export default withRouter(MenuItem);
