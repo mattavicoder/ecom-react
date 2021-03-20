@@ -9,7 +9,7 @@ interface reactState extends RouteComponentProps<any>{
 
 const MenuItem: FunctionComponent<reactState> = ({ typeMenu: {title, imageUrl, size},history}) => {
     console.log(history)
-   return <div className={`${size} menu-item`} onClick={() => history.push('/india')} >
+   return <div className={`${size} menu-item`} onClick={() => history.push('/shop')} >
        <div className="background-image" style={{
        backgroundImage: `url(${imageUrl})` 
    }} />
