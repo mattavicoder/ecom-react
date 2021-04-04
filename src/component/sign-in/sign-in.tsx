@@ -3,7 +3,8 @@ import React from 'react';
 import './sign-in-styles.scss';
 import {SignInType} from './../../types/sign-in-sign-up';
 import {FormInput} from './../form-input/form-input-component';
-import { Button } from '../button/button-component';
+import { CustomButton } from '../button/button-component';
+import {signInWithGoogle} from './../../firebase/firebase-util';
 
 export default class SignIn extends React.Component<{}, SignInType>{
 
@@ -53,7 +54,12 @@ export default class SignIn extends React.Component<{}, SignInType>{
                     value={this.state.passWord}
                     required
                 />
-                <Button>Sign In</Button>
+                <div className="buttons">
+                <CustomButton>Sign In</CustomButton>
+                <CustomButton onClick={signInWithGoogle} isGoogleSignIn={true}>Sing In With Google</CustomButton>
+                </div>
+                
+                
             </form>
         </div>
     }

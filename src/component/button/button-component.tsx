@@ -1,9 +1,15 @@
 import React, { FunctionComponent } from 'react'
 import './button-style.scss'
 
-export const Button:FunctionComponent<{}> = ({children, ...others}) => {
+interface buttonProps {
+    children: React.ReactNode,
+    onClick?: any,
+    isGoogleSignIn?: boolean
+}
 
-    return <button type="button" className="custom-button" {...others}>
+export const CustomButton:FunctionComponent<buttonProps> = ({children, isGoogleSignIn = false, ...others}) => {
+
+    return <button type="button" className={`${isGoogleSignIn ? "google-sign-in" : ""} custom-button`} {...others}>
         {children}
     </button>
 
