@@ -9,7 +9,7 @@ const UserReducer: Reducer<UserReduxModel> = (
   currentState = Initial_State,
   action: any
 ) => {
-  switch (action.Type) {
+  switch (action.type) {
     case "Set_Current_User":
       return {
         ...currentState,

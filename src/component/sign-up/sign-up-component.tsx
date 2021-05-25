@@ -70,7 +70,6 @@ export class SignUp extends React.Component<{}, authUser> {
     const { displayName, email, password, confirmPassword } =
       this.state.userAuth;
 
-    console.log(this.state);
     return (
       <div className="sign-up">
         <h2 className="title">I do not have account</h2>

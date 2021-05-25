@@ -1,16 +1,24 @@
-import React from "react";
+import React, { Dispatch } from "react";
 import { Route, Switch } from "react-router-dom";
 import HomePage from "./page/homepage/homepage-component";
 import ShopPage from "./page/shop/shop.component";
-import { Header } from "./component/header/header-component";
+import Header from "./component/header/header-component";
 import { SignInSignUp } from "./page/sign-in-and-sign-up/sign-in-and-sign-up-component";
 import { authUser } from "./types/auth";
 import { auth, createUserProfileDocument } from "./firebase/firebase-util";
+import { AnyAction } from "redux";
+import { setCurrentUser } from "./redux/Reducers/UserAction";
+import { UserReduxModel } from "./redux/Models/UserReduxModel";
+import { connect } from "react-redux";
 
-export default class App extends React.Component<{}, authUser> {
+type IProps = {
+  setCurrentUser: typeof setCurrentUser;
+};
+class App extends React.Component<IProps, authUser> {
   userAuthChangeSubscription: any;
 
-  constructor(props: {} | Readonly<{}>) {
+  // eslint-disable-next-line no-empty-pattern
+  constructor(props: any) {
     super(props);
 
     this.state = { userName: "" };
@@ -18,25 +26,20 @@ export default class App extends React.Component<{}, authUser> {
 
   componentDidMount() {
     this.userAuthChangeSubscription = auth.onAuthStateChanged(async (user) => {
-      console.log(user);
-
-      // this.setState({userAuth: user, userName: user?.displayName?.toString() || ""});
       if (user) {
         const userRef = await createUserProfileDocument(user, {});
-
         userRef?.onSnapshot((snapShot) => {
-          this.setState(
-            {
-              userAuth: {
-                id: snapShot.id,
-                ...snapShot.data(),
-              },
+          this.props.setCurrentUser({
+            currentUser: {
+              id: snapShot.id,
+              ...snapShot.data(),
             },
-            () => console.log(this.state)
-          );
+          });
         });
       }
-      this.setState({ userAuth: user });
+      this.props.setCurrentUser({
+        currentUser: { displayName: user?.displayName, email: user?.email },
+      });
     });
   }
 
@@ -47,7 +50,7 @@ export default class App extends React.Component<{}, authUser> {
   render() {
     return (
       <div>
-        <Header userName={this.state.userName} />
+        <Header />
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/shop" component={ShopPage} />
@@ -57,3 +60,12 @@ export default class App extends React.Component<{}, authUser> {
     );
   }
 }
+
+const mapDispatchToProps = (dispatchEvent: Dispatch<AnyAction>) => {
+  return {
+    setCurrentUser: (user: UserReduxModel) =>
+      dispatchEvent(setCurrentUser(user)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(App);
