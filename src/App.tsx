@@ -11,8 +11,8 @@ export default class App extends React.Component<{}, authUser> {
  
   userAuthChangeSubscription : any;
 
-  constructor(){
-    super({});
+  constructor(props: {} | Readonly<{}>){
+    super(props);
 
     this.state = {userName: ""};
   }
