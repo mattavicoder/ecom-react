@@ -1,7 +1,7 @@
 import { UserReduxModel } from "../Models/UserReduxModel";
-import { ApplicationState } from "../RootReducer";
+import { UserActionTypes } from "./UserActionTypes";
 
 export const setCurrentUser = (user: UserReduxModel) => ({
-  type: "Set_Current_User",
+  type: UserActionTypes.Set_Current_User,
   PayLoad: user,
 });

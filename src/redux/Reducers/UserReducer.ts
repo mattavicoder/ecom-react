@@ -1,5 +1,6 @@
 import { combineReducers, Reducer } from "redux";
 import { UserReduxModel } from "../Models/UserReduxModel";
+import { UserActionTypes } from "./UserActionTypes";
 
 const Initial_State: UserReduxModel = {
   UserName: "",
@@ -11,7 +12,7 @@ const UserReducer: Reducer<UserReduxModel> = (
   action: any
 ) => {
   switch (action.type) {
-    case "Set_Current_User":
+    case UserActionTypes.Set_Current_User:
       return {
         ...action.PayLoad,
       };

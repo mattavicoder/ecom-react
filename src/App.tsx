@@ -1,5 +1,5 @@
 import React, { Dispatch } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import HomePage from "./page/homepage/homepage-component";
 import ShopPage from "./page/shop/shop.component";
 import Header from "./component/header/header-component";
@@ -12,6 +12,7 @@ import { connect } from "react-redux";
 
 type IProps = {
   setCurrentUser: typeof setCurrentUser;
+  UserName: string;
 };
 class App extends React.Component<IProps, UserReduxModel> {
   userAuthChangeSubscription: any;
@@ -59,12 +60,26 @@ class App extends React.Component<IProps, UserReduxModel> {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/shop" component={ShopPage} />
-          <Route exact path="/signin" component={SignInSignUp} />
+          <Route
+            exact
+            path="/signin"
+            render={() =>
+              this.props.UserName ? (
+                <Redirect to="/" />
+              ) : (
+                <SignInSignUp></SignInSignUp>
+              )
+            }
+          />
         </Switch>
       </div>
     );
   }
 }
+
+const mapStateToProps = (state: any) => ({
+  UserName: state.userRedux.UserName,
+});
 
 const mapDispatchToProps = (dispatchEvent: Dispatch<AnyAction>) => {
   return {
@@ -73,4 +88,4 @@ const mapDispatchToProps = (dispatchEvent: Dispatch<AnyAction>) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

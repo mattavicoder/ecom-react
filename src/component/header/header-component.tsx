@@ -20,7 +20,6 @@ const Header: FunctionComponent<UserReduxModel> = ({ UserName }) => {
         <Link className="option" to="/shop">
           Contact
         </Link>
-        <Link to="">{UserName}</Link>
 
         {UserName && UserName !== "" ? (
           <div className="option" onClick={() => auth.signOut()}>
