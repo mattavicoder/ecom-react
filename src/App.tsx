@@ -4,7 +4,6 @@ import HomePage from "./page/homepage/homepage-component";
 import ShopPage from "./page/shop/shop.component";
 import Header from "./component/header/header-component";
 import { SignInSignUp } from "./page/sign-in-and-sign-up/sign-in-and-sign-up-component";
-import { authUser } from "./types/auth";
 import { auth, createUserProfileDocument } from "./firebase/firebase-util";
 import { AnyAction } from "redux";
 import { setCurrentUser } from "./redux/Reducers/UserAction";
@@ -14,32 +13,38 @@ import { connect } from "react-redux";
 type IProps = {
   setCurrentUser: typeof setCurrentUser;
 };
-class App extends React.Component<IProps, authUser> {
+class App extends React.Component<IProps, UserReduxModel> {
   userAuthChangeSubscription: any;
 
   // eslint-disable-next-line no-empty-pattern
   constructor(props: any) {
     super(props);
 
-    this.state = { userName: "" };
+    this.state = { UserName: "", Email: "" };
   }
 
   componentDidMount() {
     this.userAuthChangeSubscription = auth.onAuthStateChanged(async (user) => {
+      console.log(user);
       if (user) {
         const userRef = await createUserProfileDocument(user, {});
         userRef?.onSnapshot((snapShot) => {
-          this.props.setCurrentUser({
-            currentUser: {
-              id: snapShot.id,
-              ...snapShot.data(),
-            },
-          });
+          this.setSnapShotUserModel(snapShot.data());
+        });
+      } else {
+        this.props.setCurrentUser({
+          UserName: "",
+          Email: "",
         });
       }
-      this.props.setCurrentUser({
-        currentUser: { displayName: user?.displayName, email: user?.email },
-      });
+    });
+  }
+
+  setSnapShotUserModel(data: any) {
+    console.log(data);
+    this.props.setCurrentUser({
+      UserName: data.displayName,
+      Email: data.email,
     });
   }
 

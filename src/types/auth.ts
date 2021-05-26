@@ -1,5 +1,1 @@
-export type authUser = {
-
-    userName: string;
-    userAuth?: any;
-}
+export type authUser = {};

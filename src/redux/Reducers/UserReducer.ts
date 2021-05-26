@@ -2,7 +2,8 @@ import { combineReducers, Reducer } from "redux";
 import { UserReduxModel } from "../Models/UserReduxModel";
 
 const Initial_State: UserReduxModel = {
-  currentUser: null,
+  UserName: "",
+  Email: "",
 };
 
 const UserReducer: Reducer<UserReduxModel> = (
@@ -12,8 +13,7 @@ const UserReducer: Reducer<UserReduxModel> = (
   switch (action.type) {
     case "Set_Current_User":
       return {
-        ...currentState,
-        currentUser: action.PayLoad,
+        ...action.PayLoad,
       };
     default:
       return currentState;

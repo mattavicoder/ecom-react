@@ -1,7 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
-import { authUser } from "../types/auth";
 
 var firebaseConfig = {
   apiKey: "AIzaSyBBFvYPN2qCVRQdRXwk9ZrY2QYjDUI4afA",
@@ -31,7 +30,7 @@ export const createUserProfileDocument = async (
 ) => {
   if (!userAuth) return;
 
-  const userRef = fireStore.doc(`users/${userAuth.uid}`);
+  const userRef = fireStore.doc(`Users/${userAuth.uid}`);
 
   const snapShot = await userRef.get();
 
@@ -41,10 +40,9 @@ export const createUserProfileDocument = async (
 
     try {
       await userRef.set({
-        displayName,
+        displayName: additionalData,
         email,
         createDate,
-        ...additionalData,
       });
     } catch {
       console.log("error creating user");

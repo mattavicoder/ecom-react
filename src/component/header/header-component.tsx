@@ -2,11 +2,11 @@ import React, { FunctionComponent } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { auth } from "../../firebase/firebase-util";
-import { authUser } from "../../types/auth";
+import { UserReduxModel } from "../../redux/Models/UserReduxModel";
 import { ReactComponent as Logo } from "./../../assests/crown.svg";
 import "./header-styles.scss";
 
-const Header: FunctionComponent<authUser> = ({ userName }) => {
+const Header: FunctionComponent<UserReduxModel> = ({ UserName }) => {
   return (
     <div className="header">
       <Link to="/" className="logo-container">
@@ -20,8 +20,9 @@ const Header: FunctionComponent<authUser> = ({ userName }) => {
         <Link className="option" to="/shop">
           Contact
         </Link>
+        <Link to="">{UserName}</Link>
 
-        {userName ? (
+        {UserName && UserName !== "" ? (
           <div className="option" onClick={() => auth.signOut()}>
             {" "}
             SIGN OUT{" "}
@@ -39,7 +40,7 @@ const Header: FunctionComponent<authUser> = ({ userName }) => {
 const mapStateToPros = (state: any) => {
   console.log(state);
   return {
-    userName: state.userRedux.currentUser,
+    UserName: state.userRedux.UserName,
   };
 };
 
