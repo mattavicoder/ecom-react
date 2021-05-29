@@ -3,10 +3,18 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { auth } from "../../firebase/firebase-util";
 import { UserReduxModel } from "../../redux/Models/UserReduxModel";
+import { ApplicationState } from "../../redux/RootReducer";
+import { CartDropDown } from "../cart-dropdown/cart-dropdown-component";
+import CartIcon from "../cart-icon/cart-icon-component";
 import { ReactComponent as Logo } from "./../../assests/crown.svg";
 import "./header-styles.scss";
 
-const Header: FunctionComponent<UserReduxModel> = ({ UserName }) => {
+type IProps = {
+  UserName: string;
+  Hidden: boolean;
+};
+
+const Header: FunctionComponent<IProps> = ({ UserName, Hidden }) => {
   return (
     <div className="header">
       <Link to="/" className="logo-container">
@@ -31,15 +39,18 @@ const Header: FunctionComponent<UserReduxModel> = ({ UserName }) => {
             SIGN IN
           </Link>
         )}
+
+        <CartIcon />
       </div>
+      {Hidden ? null : <CartDropDown />}
     </div>
   );
 };
 
 const mapStateToPros = (state: any) => {
-  console.log(state);
   return {
     UserName: state.userRedux.UserName,
+    Hidden: state.cartRedux.Hidden,
   };
 };
 

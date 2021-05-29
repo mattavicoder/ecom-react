@@ -6,13 +6,14 @@ import Header from "./component/header/header-component";
 import { SignInSignUp } from "./page/sign-in-and-sign-up/sign-in-and-sign-up-component";
 import { auth, createUserProfileDocument } from "./firebase/firebase-util";
 import { AnyAction } from "redux";
-import { setCurrentUser } from "./redux/Reducers/UserAction";
+import { setCurrentUser } from "./redux/Reducers/User/UserAction";
 import { UserReduxModel } from "./redux/Models/UserReduxModel";
 import { connect } from "react-redux";
 
 type IProps = {
   setCurrentUser: typeof setCurrentUser;
   UserName: string;
+  Hidden: string;
 };
 class App extends React.Component<IProps, UserReduxModel> {
   userAuthChangeSubscription: any;
@@ -79,6 +80,7 @@ class App extends React.Component<IProps, UserReduxModel> {
 
 const mapStateToProps = (state: any) => ({
   UserName: state.userRedux.UserName,
+  Hidden: state.cartRedux.Hidden,
 });
 
 const mapDispatchToProps = (dispatchEvent: Dispatch<AnyAction>) => {

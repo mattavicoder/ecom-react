@@ -1,4 +1,4 @@
-import { UserReduxModel } from "../Models/UserReduxModel";
+import { UserReduxModel } from "../../Models/UserReduxModel";
 import { UserActionTypes } from "./UserActionTypes";
 
 export const setCurrentUser = (user: UserReduxModel) => ({

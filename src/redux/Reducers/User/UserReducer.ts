@@ -1,5 +1,5 @@
 import { combineReducers, Reducer } from "redux";
-import { UserReduxModel } from "../Models/UserReduxModel";
+import { UserReduxModel } from "../../Models/UserReduxModel";
 import { UserActionTypes } from "./UserActionTypes";
 
 const Initial_State: UserReduxModel = {
