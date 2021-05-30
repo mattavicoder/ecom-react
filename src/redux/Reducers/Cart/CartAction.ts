@@ -21,6 +21,11 @@ export const cartAddItem = (item: any) => ({
   payLoad: item,
 });
 
+export const clearItemFromCart = (item: ShopItem) => ({
+  type: CartActionType.REMOVE_ITEM_FROM_CART,
+  payLoad: item,
+});
+
 export const cartAddQuantity = (
   existingItems: ShopItem[],
   newItem: ShopItem

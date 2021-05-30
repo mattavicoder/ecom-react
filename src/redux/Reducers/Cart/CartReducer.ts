@@ -22,6 +22,11 @@ const CartReducer: Reducer<CartToggle> = (
         ...state,
         CartItems: [...cartAddQuantity(state.CartItems, action.payLoad)],
       };
+    case CartActionType.REMOVE_ITEM_FROM_CART:
+      return {
+        ...state,
+        CartItems: state.CartItems.filter((i) => i.id !== action.payLoad.id),
+      };
     default:
       return state;
   }
