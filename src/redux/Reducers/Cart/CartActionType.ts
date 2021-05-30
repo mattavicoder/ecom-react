@@ -1,3 +1,4 @@
+import { ShopItem } from "../../../types/shopitems-type";
 import { cartActionReducers } from "./CartAction";
 
 export const CartActionType = {
@@ -7,7 +8,7 @@ export const CartActionType = {
 
 export type CartToggle = {
   Hidden: boolean;
-  CartItems: any;
+  CartItems: ShopItem[];
 };
 
 export type CartProps = {

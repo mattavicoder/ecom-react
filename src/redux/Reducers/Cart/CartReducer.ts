@@ -1,5 +1,6 @@
 import { Reducer } from "redux";
 import { CartToggle, CartActionType } from "./CartActionType";
+import { cartAddQuantity } from "./CartAction";
 
 const Initial_State: CartToggle = {
   Hidden: true,
@@ -19,7 +20,7 @@ const CartReducer: Reducer<CartToggle> = (
     case CartActionType.ADD_ITEM:
       return {
         ...state,
-        CartItems: [...state.CartItems, action.payLoad],
+        CartItems: cartAddQuantity(state.CartItems, action.payLoad),
       };
     default:
       return state;
