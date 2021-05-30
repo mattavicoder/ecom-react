@@ -26,7 +26,6 @@ class App extends React.Component<IProps, UserReduxModel> {
 
   componentDidMount() {
     this.userAuthChangeSubscription = auth.onAuthStateChanged(async (user) => {
-      console.log(user);
       if (user) {
         const userRef = await createUserProfileDocument(user, {});
         userRef?.onSnapshot((snapShot) => {
@@ -42,7 +41,6 @@ class App extends React.Component<IProps, UserReduxModel> {
   }
 
   setSnapShotUserModel(data: any) {
-    console.log(data);
     this.props.setCurrentUser({
       UserName: data.displayName,
       Email: data.email,

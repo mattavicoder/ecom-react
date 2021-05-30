@@ -2,9 +2,7 @@ import React, { FunctionComponent } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { auth } from "../../firebase/firebase-util";
-import { UserReduxModel } from "../../redux/Models/UserReduxModel";
-import { ApplicationState } from "../../redux/RootReducer";
-import { CartDropDown } from "../cart-dropdown/cart-dropdown-component";
+import CartDropDown from "../cart-dropdown/cart-dropdown-component";
 import CartIcon from "../cart-icon/cart-icon-component";
 import { ReactComponent as Logo } from "./../../assests/crown.svg";
 import "./header-styles.scss";
@@ -48,7 +46,6 @@ const Header: FunctionComponent<IProps> = ({ UserName, Hidden }) => {
 };
 
 const mapStateToPros = (state: any) => {
-  console.log(state);
   return {
     UserName: state.userRedux.UserName,
     Hidden: state.cartRedux.Hidden,

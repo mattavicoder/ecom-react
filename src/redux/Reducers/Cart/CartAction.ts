@@ -25,7 +25,7 @@ export const cartAddQuantity = (
   existingItems: ShopItem[],
   newItem: ShopItem
 ) => {
-  let itemExists = existingItems.findIndex((i) => i.id === newItem.id);
+  let itemExists = existingItems?.findIndex((i) => i.id === newItem.id);
   if (itemExists > -1) {
     existingItems[itemExists].quantity =
       (existingItems[itemExists].quantity || 0) + 1;

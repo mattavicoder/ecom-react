@@ -20,7 +20,7 @@ const CartReducer: Reducer<CartToggle> = (
     case CartActionType.ADD_ITEM:
       return {
         ...state,
-        CartItems: cartAddQuantity(state.CartItems, action.payLoad),
+        CartItems: [...cartAddQuantity(state.CartItems, action.payLoad)],
       };
     default:
       return state;
