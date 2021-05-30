@@ -7,11 +7,7 @@ import { ReactComponent as ShoppingIcon } from "./../../assests/shopping-bag.svg
 import { createStructuredSelector } from "reselect";
 
 import "./cart-icon-styles.scss";
-
-type IProps = {
-  toggleCartAction: typeof toggleCartAction;
-  ItemCount: number;
-};
+import { withRouter } from "react-router";
 
 const CartIcon: React.FC = (props: any) => (
   <div className="cart-icon" onClick={props.toggleCartAction}>

@@ -11,6 +11,7 @@ import { UserReduxModel } from "./redux/Models/UserReduxModel";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { selectCurrentUserName } from "./redux/Reducers/User/UserSelector";
+import CheckOut from "./component/checkout/check-out-component";
 
 type IProps = {
   setCurrentUser: typeof setCurrentUser;
@@ -60,6 +61,7 @@ class App extends React.Component<IProps, UserReduxModel> {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/shop" component={ShopPage} />
+          <Route exact path="/checkout" component={CheckOut} />
           <Route
             exact
             path="/signin"
