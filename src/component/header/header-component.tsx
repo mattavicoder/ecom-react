@@ -14,7 +14,8 @@ type IProps = {
   Hidden: boolean;
 };
 
-const Header: FunctionComponent<IProps> = ({ UserName, Hidden }) => {
+const Header: FunctionComponent<IProps> = ({ UserName, Hidden = true }) => {
+  console.log(Hidden);
   return (
     <div className="header">
       <Link to="/" className="logo-container">

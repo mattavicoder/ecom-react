@@ -3,6 +3,7 @@ import { CartToggle, CartActionType } from "./CartActionType";
 
 const Initial_State: CartToggle = {
   Hidden: false,
+  CartItems: [],
 };
 
 const CartReducer: Reducer<CartToggle> = (
@@ -14,6 +15,11 @@ const CartReducer: Reducer<CartToggle> = (
       return {
         ...state,
         Hidden: !state.Hidden,
+      };
+    case CartActionType.ADD_ITEM:
+      return {
+        ...state,
+        CartItems: [...state.CartItems, action.payLoad],
       };
     default:
       return state;

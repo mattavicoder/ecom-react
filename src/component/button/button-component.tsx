@@ -6,18 +6,22 @@ interface buttonProps {
   onClick?: any;
   isGoogleSignIn?: boolean;
   buttonType?: string;
+  inverted?: boolean;
 }
 
 export const CustomButton: FunctionComponent<buttonProps> = ({
   children,
   buttonType = "button",
   isGoogleSignIn = false,
+  inverted = false,
   ...others
 }) => {
   return (
     <button
       type={buttonType == "submit" ? "submit" : "button"}
-      className={`${isGoogleSignIn ? "google-sign-in" : ""} custom-button`}
+      className={`${isGoogleSignIn ? "google-sign-in" : ""}
+                  ${inverted ? "inverted" : ""}
+                   custom-button`}
       {...others}
     >
       {children}
