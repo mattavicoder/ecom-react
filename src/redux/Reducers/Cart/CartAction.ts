@@ -22,20 +22,37 @@ export const cartAddItem = (item: any) => ({
 });
 
 export const clearItemFromCart = (item: ShopItem) => ({
-  type: CartActionType.REMOVE_ITEM_FROM_CART,
+  type: CartActionType.CLEAR_ITEM_FROM_CART,
   payLoad: item,
+});
+
+export const removeItemFromCart = (item: ShopItem) => ({
+  type: CartActionType.REMOVE_ITEM_FROM_CART,
+  payload: item,
 });
 
 export const cartAddQuantity = (
   existingItems: ShopItem[],
   newItem: ShopItem
 ) => {
-  let itemExists = existingItems?.findIndex((i) => i.id === newItem.id);
-  if (itemExists > -1) {
-    existingItems[itemExists].quantity =
-      (existingItems[itemExists].quantity || 0) + 1;
-  } else {
-    existingItems.push({ ...newItem, quantity: 1 });
+  let itemExists = existingItems?.find((i) => i.id === newItem.id);
+  if (itemExists) {
+    return existingItems.map((i) =>
+      i.id === newItem.id ? { ...i, quantity: (i.quantity || 0) + 1 } : i
+    );
   }
-  return existingItems;
+
+  return [...existingItems, { ...newItem, quantity: 1 }];
+};
+
+export const removeItem = (existingItems: ShopItem[], newItem: ShopItem) => {
+  let itemExists = existingItems?.find((i) => i.id === newItem.id);
+
+  if ((itemExists?.quantity || 1) === 1) {
+    return existingItems.filter((i) => i.id !== newItem.id);
+  }
+
+  return existingItems.map((i) =>
+    i.id === newItem.id ? { ...i, quantity: (i.quantity || 1) - 1 } : i
+  );
 };

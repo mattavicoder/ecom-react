@@ -1,6 +1,6 @@
 import { Reducer } from "redux";
 import { CartToggle, CartActionType } from "./CartActionType";
-import { cartAddQuantity } from "./CartAction";
+import { cartAddQuantity, removeItem } from "./CartAction";
 
 const Initial_State: CartToggle = {
   Hidden: true,
@@ -22,10 +22,15 @@ const CartReducer: Reducer<CartToggle> = (
         ...state,
         CartItems: [...cartAddQuantity(state.CartItems, action.payLoad)],
       };
-    case CartActionType.REMOVE_ITEM_FROM_CART:
+    case CartActionType.CLEAR_ITEM_FROM_CART:
       return {
         ...state,
         CartItems: state.CartItems.filter((i) => i.id !== action.payLoad.id),
+      };
+    case CartActionType.REMOVE_ITEM_FROM_CART:
+      return {
+        ...state,
+        CartItems: [...removeItem(state.CartItems, action.payload)],
       };
     default:
       return state;
