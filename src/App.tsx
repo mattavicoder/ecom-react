@@ -13,7 +13,6 @@ import { connect } from "react-redux";
 type IProps = {
   setCurrentUser: typeof setCurrentUser;
   UserName: string;
-  Hidden: string;
 };
 class App extends React.Component<IProps, UserReduxModel> {
   userAuthChangeSubscription: any;
@@ -80,7 +79,6 @@ class App extends React.Component<IProps, UserReduxModel> {
 
 const mapStateToProps = (state: any) => ({
   UserName: state.userRedux.UserName,
-  Hidden: state.cartRedux.Hidden,
 });
 
 const mapDispatchToProps = (dispatchEvent: Dispatch<AnyAction>) => {

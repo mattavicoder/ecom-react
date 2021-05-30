@@ -2,7 +2,7 @@ import { Reducer } from "redux";
 import { CartToggle, CartActionType } from "./CartActionType";
 
 const Initial_State: CartToggle = {
-  Hidden: false,
+  Hidden: true,
   CartItems: [],
 };
 

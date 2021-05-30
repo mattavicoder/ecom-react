@@ -14,8 +14,7 @@ type IProps = {
   Hidden: boolean;
 };
 
-const Header: FunctionComponent<IProps> = ({ UserName, Hidden = true }) => {
-  console.log(Hidden);
+const Header: FunctionComponent<IProps> = ({ UserName, Hidden }) => {
   return (
     <div className="header">
       <Link to="/" className="logo-container">
@@ -49,6 +48,7 @@ const Header: FunctionComponent<IProps> = ({ UserName, Hidden = true }) => {
 };
 
 const mapStateToPros = (state: any) => {
+  console.log(state);
   return {
     UserName: state.userRedux.UserName,
     Hidden: state.cartRedux.Hidden,
