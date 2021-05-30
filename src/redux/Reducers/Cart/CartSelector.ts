@@ -3,6 +3,11 @@ import { ShopItem } from "../../../types/shopitems-type";
 
 const selectCart = (state: any) => state.cartRedux;
 
+export const selectCartToggle = createSelector(
+  [selectCart],
+  (cartRedux) => cartRedux.Hidden
+);
+
 export const selectCartItems = createSelector(
   [selectCart],
   (cartRedux) => cartRedux.CartItems

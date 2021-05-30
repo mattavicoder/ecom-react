@@ -6,6 +6,9 @@ import CartDropDown from "../cart-dropdown/cart-dropdown-component";
 import CartIcon from "../cart-icon/cart-icon-component";
 import { ReactComponent as Logo } from "./../../assests/crown.svg";
 import "./header-styles.scss";
+import { createStructuredSelector } from "reselect";
+import { selectCurrentUserName } from "../../redux/Reducers/User/UserSelector";
+import { selectCartToggle } from "../../redux/Reducers/Cart/CartSelector";
 
 type IProps = {
   UserName: string;
@@ -45,11 +48,9 @@ const Header: FunctionComponent<IProps> = ({ UserName, Hidden }) => {
   );
 };
 
-const mapStateToPros = (state: any) => {
-  return {
-    UserName: state.userRedux.UserName,
-    Hidden: state.cartRedux.Hidden,
-  };
-};
+const mapStateToPros = createStructuredSelector({
+  UserName: selectCurrentUserName,
+  Hidden: selectCartToggle,
+});
 
 export default connect(mapStateToPros)(Header);

@@ -5,6 +5,7 @@ import { ShopItem } from "../../types/shopitems-type";
 import { CustomButton } from "../button/button-component";
 import CartItem from "../cart-item/cart-item-component";
 import "./cart-dropdown-styles.scss";
+import { createStructuredSelector } from "reselect";
 
 type IProps = {
   CartItems: ShopItem[];
@@ -23,8 +24,8 @@ const CartDropDown: FunctionComponent<IProps> = ({ CartItems }) => {
   );
 };
 
-const mapStateToProps = (state: any) => {
-  return { CartItems: selectCartItems(state) };
-};
+const mapStateToProps = createStructuredSelector({
+  CartItems: selectCartItems,
+});
 
 export default connect(mapStateToProps)(CartDropDown);

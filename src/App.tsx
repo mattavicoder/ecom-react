@@ -9,6 +9,8 @@ import { AnyAction } from "redux";
 import { setCurrentUser } from "./redux/Reducers/User/UserAction";
 import { UserReduxModel } from "./redux/Models/UserReduxModel";
 import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { selectCurrentUserName } from "./redux/Reducers/User/UserSelector";
 
 type IProps = {
   setCurrentUser: typeof setCurrentUser;
@@ -75,8 +77,8 @@ class App extends React.Component<IProps, UserReduxModel> {
   }
 }
 
-const mapStateToProps = (state: any) => ({
-  UserName: state.userRedux.UserName,
+const mapStateToProps = createStructuredSelector({
+  UserName: selectCurrentUserName,
 });
 
 const mapDispatchToProps = (dispatchEvent: Dispatch<AnyAction>) => {
