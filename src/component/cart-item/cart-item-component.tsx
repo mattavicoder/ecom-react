@@ -4,7 +4,6 @@ import { ShopItem } from "../../types/shopitems-type";
 import "./cart-item-component.scss";
 
 const CartItem: React.FC<ShopItem> = (item) => {
-  console.log(item);
   return (
     <div className="cart-item">
       <img src={item.imageUrl} alt="item"></img>

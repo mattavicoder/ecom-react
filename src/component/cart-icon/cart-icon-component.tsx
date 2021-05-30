@@ -2,18 +2,20 @@ import React, { Dispatch, FunctionComponent } from "react";
 import { connect } from "react-redux";
 import { AnyAction } from "redux";
 import { toggleCartAction } from "../../redux/Reducers/Cart/CartAction";
+import { selectCartTotalCount } from "../../redux/Reducers/Cart/CartSelector";
 import { ReactComponent as ShoppingIcon } from "./../../assests/shopping-bag.svg";
 
 import "./cart-icon-styles.scss";
 
 type IProps = {
   toggleCartAction: typeof toggleCartAction;
+  ItemCount: number;
 };
 
 const CartIcon: React.FC = (props: any) => (
   <div className="cart-icon" onClick={props.toggleCartAction}>
     <ShoppingIcon className="shopping-icon" />
-    <span className="item-count">0</span>
+    <span className="item-count">{props.ItemCount}</span>
   </div>
 );
 
@@ -23,4 +25,8 @@ const dispatchStateToProps = (dispatch: Dispatch<AnyAction>) => {
   };
 };
 
-export default connect(null, dispatchStateToProps)(CartIcon);
+const mapStateToProps = (state: any) => ({
+  ItemCount: selectCartTotalCount(state),
+});
+
+export default connect(mapStateToProps, dispatchStateToProps)(CartIcon);

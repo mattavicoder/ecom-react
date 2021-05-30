@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from "react";
 import { connect } from "react-redux";
+import { selectCartItems } from "../../redux/Reducers/Cart/CartSelector";
 import { ShopItem } from "../../types/shopitems-type";
 import { CustomButton } from "../button/button-component";
 import CartItem from "../cart-item/cart-item-component";
@@ -10,15 +11,11 @@ type IProps = {
 };
 
 const CartDropDown: FunctionComponent<IProps> = ({ CartItems }) => {
-  console.log(CartItems);
   return (
     <div className="cart-dropdown">
       <div className="cart-items">
         {CartItems.map((i) => {
-          <>
-            <div>{i.name}</div>
-            <CartItem key={i.id} {...i} />
-          </>;
+          return <CartItem key={i.id} {...i}></CartItem>;
         })}
       </div>
       <CustomButton>Go To CheckOut</CustomButton>
@@ -27,7 +24,7 @@ const CartDropDown: FunctionComponent<IProps> = ({ CartItems }) => {
 };
 
 const mapStateToProps = (state: any) => {
-  return { CartItems: state.cartRedux.CartItems };
+  return { CartItems: selectCartItems(state) };
 };
 
 export default connect(mapStateToProps)(CartDropDown);
