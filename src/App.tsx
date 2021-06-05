@@ -60,8 +60,8 @@ class App extends React.Component<IProps, UserReduxModel> {
         <Header />
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route exact path="/shop" component={ShopPage} />
-          <Route exact path="/checkout" component={CheckOut} />
+          <Route path="/shop" component={ShopPage} />
+          <Route path="/checkout" component={CheckOut} />
           <Route
             exact
             path="/signin"
