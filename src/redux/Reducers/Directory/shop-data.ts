@@ -1,4 +1,4 @@
-import { ShopCategory } from "./../../types/shopitems-type";
+import { ShopCategory } from "./../../../types/shopitems-type";
 
 export const SHOP_DATA: ShopCategory[] = [
   {

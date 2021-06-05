@@ -1,23 +1,12 @@
 import React from "react";
-import { CollectionPreview } from "../../component/collection-preview/collection-preview";
-import { ShopCategory, ShopCategoryData } from "../../types/shopitems-type";
-import { SHOP_DATA } from "./shop-data";
+import CollectionsOverView from "./../../component/collections-overview/collections-overview-component";
 
-export default class ShopPage extends React.Component<{}, ShopCategoryData> {
-  constructor(props: any) {
-    super(props);
+const ShopPage = () => {
+  return (
+    <div>
+      <CollectionsOverView />
+    </div>
+  );
+};
 
-    this.state = { shopCategories: SHOP_DATA };
-  }
-
-  render() {
-    const categories = this.state.shopCategories;
-    return (
-      <div>
-        {categories.map((item) => {
-          return <CollectionPreview key={item.id} {...item} />;
-        })}
-      </div>
-    );
-  }
-}
+export default ShopPage;
