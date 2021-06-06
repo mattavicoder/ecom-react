@@ -7,6 +7,7 @@ import {
 } from "../../redux/Reducers/Cart/CartSelector";
 import { ShopItem } from "../../types/shopitems-type";
 import CheckOutItem from "../checkout-item/checkout-item-component";
+import StripeCheckOutButton from "../stripe-button/stripe-button.component";
 
 import "./check-out-component.scss";
 
@@ -46,6 +47,15 @@ const CheckOut: FunctionComponent<IProps> = ({ cartItems, total }) => {
       <div className="total">
         <span>Total: ${total}</span>
       </div>
+
+      <div className="test-warning">
+        Please Use the following card details
+        <br />
+        4242 4242 4242 4242 CVV 123,
+        <br />
+        month and year as per current date
+      </div>
+      <StripeCheckOutButton price={total} />
     </div>
   );
 };
