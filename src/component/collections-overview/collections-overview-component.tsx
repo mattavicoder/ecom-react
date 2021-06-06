@@ -2,7 +2,7 @@ import React from "react";
 import { CollectionPreview } from "../../component/collection-preview/collection-preview";
 import { ShopCategoryData } from "../../types/shopitems-type";
 import { createStructuredSelector } from "reselect";
-import { getShopCollections } from "../../redux/Reducers/Shop/ShopSelector";
+import { getCollectionsForPreview } from "../../redux/Reducers/Shop/ShopSelector";
 import { connect } from "react-redux";
 import "./collections-overview-styles.scss";
 
@@ -19,7 +19,7 @@ const CollectionsOverView: React.FC<ShopCategoryData> = ({
 };
 
 const mapStateToProps = createStructuredSelector({
-  shopCategories: getShopCollections,
+  shopCategories: getCollectionsForPreview,
 });
 
 export default connect(mapStateToProps)(CollectionsOverView);

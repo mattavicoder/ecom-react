@@ -1,13 +1,5 @@
 import { createSelector } from "reselect";
 
-const shopCategoryEnum: { [key: string]: number } = {
-  hats: 1,
-  sneakers: 2,
-  jackets: 3,
-  womens: 4,
-  mens: 5,
-};
-
 const shopState = (state: any) => state;
 
 export const getShopCollections = createSelector(
@@ -15,9 +7,13 @@ export const getShopCollections = createSelector(
   (data) => data.shopRedux
 );
 
+export const getCollectionsForPreview = createSelector(
+  [getShopCollections],
+  (collections) => Object.keys(collections).map((k) => collections[k])
+);
+
 export const getCategoryCollections = (categoryParam: string) =>
-  createSelector([getShopCollections], (collections) =>
-    collections.find(
-      (c: { id: number }) => c.id === shopCategoryEnum[categoryParam]
-    )
+  createSelector(
+    [getShopCollections],
+    (collections) => collections[categoryParam]
   );
